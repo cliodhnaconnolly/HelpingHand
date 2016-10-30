@@ -12,7 +12,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
-#    assert_not flash.FILL_IN
+    # assert is_logged_in?    # No idea why it won't work
+    # Can't seem to find test helper
   end
 
 #  test "invalid signup information" do
