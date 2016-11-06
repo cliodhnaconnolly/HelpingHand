@@ -60,6 +60,10 @@ textarea {
   margin-bottom: 10px;
 }
 
+.dropdown-backdrop {
+  position: static;
+}
+
 /* header */
 
 #logo {
@@ -78,9 +82,6 @@ textarea {
   text-decoration: none;
 }
 
-.dropdown-backdrop {
-  position: static;
-}
 
 /* footer */
 
