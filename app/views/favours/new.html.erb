@@ -1,0 +1,23 @@
+<% provide(:title, 'Create your favour') %>
+<h1>Create your new favour!</h1>
+<h2>What do you need help with? Jump leads? Spare pen? Help lifting a heavy telly?</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@favour) do |f| %>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+
+        <%= f.label :deadline %>
+        <%= f.datetime_local_field :deadline %>
+
+        <%= f.label :creator, 'Please input your username. Temporary Measure' %>
+        <%= f.text_field :creator %>
+
+        <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

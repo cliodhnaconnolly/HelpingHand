@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'favours/new'
+
   get 'sessions/new'
 
   get 'test/testing'
@@ -10,9 +12,11 @@ Rails.application.routes.draw do
   get     '/about',     to: 'static_pages#about'
   get     '/contact',   to: 'static_pages#contact'
   get     '/signup',    to: 'users#new'
-  post  '/signup',    to: 'users#create'
+  post    '/signup',    to: 'users#create'
   get     '/login',     to: 'sessions#new'
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
+  get     '/favours',   to: 'favours#index'
   resources :users
+  resources :favours
 end

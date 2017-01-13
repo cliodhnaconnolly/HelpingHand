@@ -1,0 +1,28 @@
+<div class="row">
+  <aside class="col-md-12">
+    <section class="favours_all">
+      <h1>All Favours Asked...</h1>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Creator</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @favours.each do |favour| %>
+            <tr>
+              <td><%= link_to favour.title, favour %></a></td>
+              <td><%= favour.creator %></td>
+              <td><%= favour.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </section>
+  </aside>
+</div>
