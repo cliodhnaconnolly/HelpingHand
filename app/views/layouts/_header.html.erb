@@ -1,4 +1,7 @@
-<script tpye="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--<script tpye="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <%= link_to "helping hand", root_path, id: "logo" %>
@@ -12,17 +15,17 @@
       <div class = "collapse navbar-collapse" id="navbarHelpingHand">
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Home",    root_path %></li>
-          <li><%= link_to "Favours", favours_path %></li>
-          <li><%= link_to "Inbox",    inbox_path %></li>
           <% if logged_in? %>
+              <li><%= link_to "Favours", favours_path %></li>
+              <li><%= link_to "Inbox",    inbox_path %></li>
               <li><%= link_to "Users", users_path %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Account <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to "Profile", current_user %></li>
-                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                  <li><%= link_to "View My Profile", current_user %></li>
+                  <li><%= link_to "Edit My Profile", edit_user_path(current_user) %></li>
                   <li class="divider"></li>
                   <li>
                     <%= link_to "Log out", logout_path, method: "delete" %>

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Helping Hand!!"
+      flash[:success] = "Welcome to the Helping Hand!"
       redirect_to @user
     else
       render 'new'
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation, :bio)
     end
 
     # Confirms an admin user.
