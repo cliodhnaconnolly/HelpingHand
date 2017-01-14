@@ -1,10 +1,24 @@
 <%= provide(:title, @favour.title) %>
 <div class="row">
-  <aside class="col-md-12">
-    <section class="favour_info">
-      <h1><%= @favour.title %></h1>
-      <p>Asked by <%= @favour.creator %></p>
-      <p><%= @favour.description %></p>
-    </section>
-  </aside>
+
+  <h3><%= @favour.title %></h3>
+
+  <p><%= @favour.description %></p>
+
+  <p>
+    Posted <%= time_ago_in_words(@favour.created_at) %> ago.
+    <% if current_user?(@favour.user) %>
+      <%= link_to "Delete", @favour, method: :delete,
+                  data: { confirm: "You sure?" } %>
+    <% end %>
+  </p>
+
+  <p>Posted by : </p>
+  <%= link_to gravatar_for(@favour.user, size: 50), @favour.user %>
+  <span class="user"><%= link_to @favour.user.name, @favour.user %></span>
+
+  <p></p>
+  <%= link_to 'Can you help? Send a message!', conversations_path(sender_id: current_user.id, receiver_id: @favour.user.id), method: 'post'%>
+
+
 </div>

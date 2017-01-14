@@ -11,7 +11,7 @@ class FavoursController < ApplicationController
   end
 
   def create
-    @favour = Favour.new(favour_params)
+    @favour = current_user.favours.build(favour_params)
     if @favour.save
       flash[:success] = 'Favour has been saved!'
       redirect_to @favour
@@ -32,11 +32,11 @@ class FavoursController < ApplicationController
 
   private
     def favour_params
-      params.require(:favour).permit(:title, :description, :deadline, :creator)
+      params.require(:favour).permit(:title, :description, :deadline)
     end
 
     def correct_user
-      @micropost = current_user.favours.find_by(id: params[:id])
-      redirect_to root_url if @micropost.nil?
+      @favour = current_user.favours.find_by(id: params[:id])
+      redirect_to root_url if @favour.nil?
     end
 end

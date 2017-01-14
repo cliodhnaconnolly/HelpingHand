@@ -1,0 +1,24 @@
+<div class="ui segment">
+  <h3>Mailbox</h3>
+
+  <ul class="list-group">
+    <% @conversations.each do |conversation| %>
+
+        <% if conversation.sender_id == current_user.id || conversation.receiver_id == current_user.id %>
+            <% if conversation.sender_id == current_user.id %>
+                <% receiver = User.find(conversation.receiver_id) %>
+            <% else %>
+                <% receiver = User.find(conversation.sender_id) %>
+            <% end %>
+          <li class="list-group-item">
+            <%= link_to gravatar_for(receiver, size: 50), receiver %>
+            <%= link_to receiver.name, conversation_messages_path(conversation)%>
+            <p></p>
+            <p>See latest messages...</p>
+          </li>
+        <% end %>
+
+      <% end %>
+
+  </ul>
+</div>

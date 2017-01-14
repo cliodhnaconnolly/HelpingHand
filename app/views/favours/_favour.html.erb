@@ -1,14 +1,18 @@
 <li id="favour-<%= favour.id %>">
   <%= link_to gravatar_for(favour.user, size: 50), favour.user %>
-  <%= will_paginate @favours %>
+
   <span class="user"><%= link_to favour.user.name, favour.user %></span>
+
   <span class="title"><%= favour.title %></span>
+
   <span class="description"><%= favour.description %></span>
+
   <span class="timestamp">
     Posted <%= time_ago_in_words(favour.created_at) %> ago.
-    <% if current_user?(micropost.user) %>
-      <%= link_to "delete", micropost, method: :delete,
+    <% if current_user?(favour.user) %>
+      <%= link_to "Delete", favour, method: :delete,
                   data: { confirm: "You sure?" } %>
     <% end %>
   </span>
+
 </li>

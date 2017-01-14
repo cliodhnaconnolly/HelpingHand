@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
   get     '/favours',   to: 'favours#index'
+  get     '/inbox',     to: 'conversations#inbox'
   resources :users
   resources :favours
   resources :conversations do
