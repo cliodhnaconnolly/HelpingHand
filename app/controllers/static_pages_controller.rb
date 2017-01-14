@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
+    @favour = current_user.favours.build if logged_in?
   end
 
   def help

@@ -5,6 +5,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@favour) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :title %>
         <%= f.text_field :title %>
 
@@ -13,9 +14,6 @@
 
         <%= f.label :deadline %>
         <%= f.datetime_local_field :deadline %>
-
-        <%= f.label :creator, 'Please input your username. Temporary Measure' %>
-        <%= f.text_field :creator %>
 
         <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
     <% end %>

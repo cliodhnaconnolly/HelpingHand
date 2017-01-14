@@ -1,0 +1,12 @@
+<%= form_for(@favour) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.label :deadline %>
+    <%= f.datetime_local_field :deadline %>
+
+    <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
+<% end %>
