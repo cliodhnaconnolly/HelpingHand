@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   get     '/favours',   to: 'favours#index'
   resources :users
   resources :favours
+  resources :conversations do
+    resources :messages
+  end
 end
