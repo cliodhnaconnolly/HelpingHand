@@ -1,15 +1,6 @@
-# Ruby on Rails Tutorial sample application
+# Helping Hand Application
 
-This is the sample application for
-[*Ruby on Rails Tutorial:
-Learn Web Development with Rails*](http://www.railstutorial.org/)
-by [Michael Hartl](http://www.michaelhartl.com/).
-
-## License
-
-All source code in the [Ruby on Rails Tutorial](http://railstutorial.org/)
-is available jointly under the MIT License and the Beerware License. See
-[LICENSE.md](LICENSE.md) for details.
+An application with an aim to help connect people in their shared locality to solve small favours that can be asked in everyday life.
 
 ## Getting started
 
@@ -37,8 +28,6 @@ If the test suite passes, you'll be ready to run the app in a local server:
 $ rails server
 ```
 
-For more information, see the
-[*Ruby on Rails Tutorial* book](http://www.railstutorial.org/book).
 
 ## Link to Heroku Deployment
 https://helping-hand-ucd.herokuapp.com/
