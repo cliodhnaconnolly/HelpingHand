@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127153844) do
+ActiveRecord::Schema.define(version: 20170127172456) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
@@ -24,12 +24,9 @@ ActiveRecord::Schema.define(version: 20170127153844) do
     t.string   "title"
     t.string   "description"
     t.datetime "deadline"
-    t.float    "latitude"
-    t.float    "longitude"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.string   "address"
     t.index ["user_id"], name: "index_favours_on_user_id"
   end
 
