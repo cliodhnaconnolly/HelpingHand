@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+  resources :forgot_passwords, only: [:new, :create, :edit, :update]
 end
