@@ -44,7 +44,7 @@ class User < ApplicationRecord
   end
 
   def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
+    UserMailer.forgot_password(self).deliver_now
   end
 
   def password_reset_expired?
