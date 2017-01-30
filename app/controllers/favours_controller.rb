@@ -26,8 +26,8 @@ class FavoursController < ApplicationController
 
   def destroy
     @favour.destroy
-    flash[:success] = "Favour deleted"
-    redirect_to request.referrer || root_url
+    flash[:success] = 'Favour deleted'
+    redirect_to root_url
   end
 
   private
