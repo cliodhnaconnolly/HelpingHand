@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   get     '/contact',   to: 'static_pages#contact'
   get     '/signup',    to: 'users#new'
   post    '/signup',    to: 'users#create'
+  post     '/store_location/:id/',     to: 'users#store_user_location'
   get     '/login',     to: 'sessions#new'
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
   get     '/favours',   to: 'favours#index'
   get     '/inbox',     to: 'conversations#inbox'
+  get     '/test/:id/',      to: 'users#test'
   resources :users
   resources :favours
   resources :conversations do

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  #respond_to :html, :js
 
   def show
     @user = User.find(params[:id])
@@ -10,6 +11,28 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+  end
+
+  def store_user_location
+    @user = User.find(params[:id])
+    respond_to do |format|
+      format.json {
+        lat = params["lat"]
+        lng = params["lng"]
+        @user.lat = lat
+        @user.long = lng
+        @user.save
+        #message = params["lat"];
+        #message2 = params["lng"];
+        #puts 'RECEIVED' + message.to_s
+        #puts 'AND RECEIVED' + message2.to_s
+        puts 'STORED' + @user.lat.to_s + ', ' + @user.long.to_s
+      }
+    end
+  end
+
+  def test
+    @user = User.find(params[:id])
   end
 
   def create

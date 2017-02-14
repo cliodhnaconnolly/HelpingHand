@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127172456) do
+ActiveRecord::Schema.define(version: 20170205210943) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20170127172456) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.float    "lat"
+    t.float    "long"
+    t.string   "address"
     t.index ["user_id"], name: "index_favours_on_user_id"
   end
 
@@ -52,6 +55,8 @@ ActiveRecord::Schema.define(version: 20170127172456) do
     t.text     "bio"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.float    "lat"
+    t.float    "long"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
