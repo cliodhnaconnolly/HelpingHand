@@ -11,30 +11,48 @@ class FavoursController < ApplicationController
   end
 
   def create
-    puts deadline_options_to_time(params[:deadline_option]).to_s
-    puts params[:use_current_location]
-    puts current_user.name.to_s
+    respond_to do |format|
+      format.html {
+        # Save favours
+        @favour = current_user.favours.build(favour_params)
 
-    deadline_options_to_time(params[:deadline_option])
+        @favour.deadline = deadline_options_to_time(params[:deadline_option])
+        if params[:use_current_location] == 'true'
+          @favour.use_location = true
+        else
+          @favour.use_location = false
+        end
+        @favour.lat = params[:lat]
+        @favour.long = params[:long]
+        @favour.address = params[:address]
 
-    if params[:use_current_location] == 'true'
-      puts 'hello again'
-      puts '<' + params[:lat].to_s + '>'
-      puts params[:lng].to_s
-
-      if params[:lat] == ''
-        puts 'empty string lads'
-      end
-
+        if @favour.save
+          flash[:success] = 'Favour has been saved!'
+          redirect_to @favour
+        else
+          render 'new'
+        end
+        # puts 'nope'
+        # lat =  params[:test]
+        # puts 'lat = ' + lat.to_s
+        #
+        # lng = params[:ing]
+        # puts 'lng = ' + lng.to_s
+        #
+        # title = params[:title]
+        # description = params[:description]
+        #
+        # deadline_option = params[:deadline_option]
+        # puts deadline_options_to_time(deadline_option)
+        #
+        # use_current_location = params[:use_current_location]
+        # puts 'UCL = ' + use_current_location
+        #
+        # plz = params[:plz]
+        # puts "HELLO <" + plz.to_s + ">"
+      }
     end
 
-    #@favour = current_user.favours.build(favour_params)
-    #if @favour.save
-    #  flash[:success] = 'Favour has been saved!'
-    #  redirect_to @favour
-    #else
-    #  render 'new'
-    #end
   end
 
   def index
@@ -53,7 +71,7 @@ class FavoursController < ApplicationController
 
   private
     def favour_params
-      params.require(:favour).permit(:title, :description, :deadline_option)
+      params.require(:favour).permit(:title, :description, :deadline_option, :lat, :long, :address, :use_current_location)
     end
 
     def correct_user
@@ -62,11 +80,8 @@ class FavoursController < ApplicationController
     end
 
     def deadline_options_to_time(deadline_option)
-      puts "DEADLINE OPTION GIVEN IS" + deadline_option
-
       case deadline_option.to_f
         when 1
-          puts "hello"
           Time.current + 5.minutes
         when 2
           Time.end_of_hour

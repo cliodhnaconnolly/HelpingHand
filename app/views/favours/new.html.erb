@@ -20,68 +20,34 @@
         <%= label_tag :use_current_location, "Use current location?", {class: "checkbox inline"} %>
 
         <%= hidden_field_tag :lat, '', id: 'lat' %>
-        <%= hidden_field_tag :lng, '', id: 'lng' %>
+        <%= hidden_field_tag :long, '', id: 'long' %>
 
         <% if :use_current_location != 1%>
-            <%= label_tag :search_address %>
-            <%= text_field_tag :search_address %>
+            <%= label_tag :address %>
+            <%= text_field_tag :address %>
         <% end %>
 
-        <!--<%= f.submit 'Create my Favour', class: "btn btn-primary" %>-->
-        <button onclick="GetLocation()">Submit</button>
+        <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
 
-<%= javascript_tag "var titleFavour = #{:title};" %>
-<%= javascript_tag "var descriptionFavour = #{:description};" %>
-<%= javascript_tag "var deadlineOption = #{:deadline_option};" %>
-<%= javascript_tag "var useLocation = #{:use_current_location};" %>
-
-<script type="text/javascript">
-
-  function GetLocation() {
-    window.alert("IVE BEEN CALLED")
-    // Check if browser supports getting user location via geolocation
+<script>
+  $(document).on('turbolinks:load', function(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(locateSuccess, locateFail);
     } else {
       alert("Your browser does not allow me to access your current location, sorry.");
     }
-  }
+
+  })
 
   // Successful geolocation
   function locateSuccess(loc) {
-    window.alert("SUCCESS")
-    // Set the user's location
-    //var userLocation = new Microsoft.Maps.Location(loc.coords.latitude, loc.coords.longitude);
-
-    //$('#lat').val(loc.coords.latitude);
-    //$('#lng').val(loc.coords.longitude);
-
-    sendLocation(loc)
+    $('#lat').val(loc.coords.latitude);
+    $('#long').val(loc.coords.longitude);
   }
 
-  function sendLocation(loc){
-
-    $.ajax({
-      type: 'POST',
-      url: '/favours/new',
-      data: {
-        title: titleFavour,
-        description: descriptionFavour,
-        deadline_option: deadlineOption,
-        use_current_location: useLocation,
-        lat: loc.coords.latitude.toString(),
-        lng: loc.coords.longitude.toString()},
-      //data: { message: 'hello'},
-      //contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(data){
-      console.log(data)
-    });
-
-  }
 
   // Unsuccessful geolocation
   function locateFail(geoPositionError) {
