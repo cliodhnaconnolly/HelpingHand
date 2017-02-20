@@ -22,8 +22,8 @@ class FavoursController < ApplicationController
         else
           @favour.use_location = false
         end
-        @favour.lat = params[:lat]
-        @favour.long = params[:long]
+        @favour.latitude = params[:lat]
+        @favour.longitude = params[:long]
         @favour.address = params[:address]
 
         if @favour.save
@@ -32,35 +32,22 @@ class FavoursController < ApplicationController
         else
           render 'new'
         end
-        # puts 'nope'
-        # lat =  params[:test]
-        # puts 'lat = ' + lat.to_s
-        #
-        # lng = params[:ing]
-        # puts 'lng = ' + lng.to_s
-        #
-        # title = params[:title]
-        # description = params[:description]
-        #
-        # deadline_option = params[:deadline_option]
-        # puts deadline_options_to_time(deadline_option)
-        #
-        # use_current_location = params[:use_current_location]
-        # puts 'UCL = ' + use_current_location
-        #
-        # plz = params[:plz]
-        # puts "HELLO <" + plz.to_s + ">"
       }
     end
 
   end
 
   def index
-    @favours = Favour.all
+    @favours = Favour.near([current_user.lat, current_user.long], 50)
+    @favours = @favours + Favour.where(longitude: nil)
   end
 
-  def near
-    @favours = Favour.all
+  def nearby
+    if params[:search].present?
+      @favours = Favour.near([current_user.lat, current_user.long], 50)
+    else
+      @favours = Favour.all
+    end
   end
 
   def destroy

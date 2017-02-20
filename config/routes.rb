@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get     '/favours',   to: 'favours#index'
   get     '/inbox',     to: 'conversations#inbox'
   get     '/test/:id/',      to: 'users#test'
+  get     '/nearby',      to: 'favours#nearby'
   resources :users
   resources :favours
   resources :conversations do

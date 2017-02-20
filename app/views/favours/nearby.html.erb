@@ -2,7 +2,7 @@
   <h1>Favour Finder</h1>
   <%= form_tag favours_path, :method => :get do %>
       <p>
-        <%= text_field_tag :search, params[:search],:id => 'geo-input' %>
+        <%= text_field_tag :search, params[:search], :id => 'geo-input' %>
         <%= submit_tag "Search Near", :name => nil %>
       </p>
   <% end %>
@@ -10,8 +10,7 @@
   <% @favours.each do |favour| %>
       <p>
       <div class="res">
-        <b><%= favour.title %></b></br>
-        <%= favour.address %></br>
+        <b><%= favour.title %></b>
       </div>
       </p>
   <% end %>
