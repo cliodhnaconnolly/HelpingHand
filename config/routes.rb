@@ -27,4 +27,5 @@ Rails.application.routes.draw do
     resources :messages
   end
   resources :forgot_passwords, only: [:new, :create, :edit, :update]
+  resources :comments,          only: [:create, :destroy]
 end

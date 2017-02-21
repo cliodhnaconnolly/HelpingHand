@@ -18,7 +18,27 @@
   <span class="user"><%= link_to @favour.user.name, @favour.user %></span>
 
   <p></p>
-  <%= link_to 'Can you help? Send a message!', conversations_path(sender_id: current_user.id, receiver_id: @favour.user.id), method: 'post'%>
+  <%= link_to 'Send a message!', conversations_path(sender_id: current_user.id, receiver_id: @favour.user.id), method: 'post'%>
 
+  <h3>Can you help? Post a comment!</h3>
+  <section class="comment_form">
+    <%= form_for(@comment) do |f| %>
+        <div class="field">
+          <%= f.text_area :content, placeholder: "Compose new comment..." %>
+          <%= hidden_field_tag :favour_id, @favour.id %>
+        </div>
+        <%= f.submit "Post", class: "btn btn-primary" %>
+    <% end %>
+  </section>
 
+  <div class="col-md-8">
+    <% if @favour.comments.any? %>
+        <h3>Comments (<%= @favour.comments.count %>)</h3>
+        <ul class="comments">
+          <%= render @comments %>
+        </ul>
+    <% else %>
+      <h3>No comments as of yet</h3>
+    <% end %>
+  </div>
 </div>
