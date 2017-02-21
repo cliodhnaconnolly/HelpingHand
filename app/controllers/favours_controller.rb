@@ -41,8 +41,12 @@ class FavoursController < ApplicationController
   end
 
   def index
-    @favours = Favour.near([current_user.lat, current_user.long], 50)
-    @favours = @favours + Favour.where(longitude: nil)
+    if(current_user.lat.nil?)
+      @favours = Favour.all
+    else
+      @favours = Favour.near([current_user.lat, current_user.long], 50)
+      @favours = @favours + Favour.where(longitude: nil)
+    end
   end
 
   def nearby

@@ -46,6 +46,15 @@
   function locateSuccess(loc) {
     $('#lat').val(loc.coords.latitude);
     $('#long').val(loc.coords.longitude);
+
+    $.ajax({
+      type: 'POST',
+      url: '/store_location/',
+      data: {lat: loc.coords.latitude, lng: loc.coords.longitude},
+      dataType: 'json'
+    }).done(function(data){
+      console.log(data)
+    });
   }
 
 

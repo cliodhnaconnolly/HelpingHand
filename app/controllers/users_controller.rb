@@ -14,19 +14,14 @@ class UsersController < ApplicationController
   end
 
   def store_user_location
-    @user = User.find(params[:id])
+    puts 'STORING USER LOCATION'
+    @user = current_user
     respond_to do |format|
       format.json {
-        lat = params["lat"]
-        lng = params["lng"]
-        @user.lat = lat
-        @user.long = lng
+        @user.lat = params[:lat]
+        @user.long = params[:lng]
         @user.save
-        #message = params["lat"];
-        #message2 = params["lng"];
-        #puts 'RECEIVED' + message.to_s
-        #puts 'AND RECEIVED' + message2.to_s
-        puts 'STORED' + @user.lat.to_s + ', ' + @user.long.to_s
+        puts 'STORED ' + @user.lat.to_s + ', ' + @user.long.to_s
       }
     end
   end
