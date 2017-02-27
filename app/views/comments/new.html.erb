@@ -1,6 +1,7 @@
 <%= form_for(@comment) do |f| %>
     <div class="field">
       <%= f.text_area :content, placeholder: "Compose new comment..." %>
+      <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
     </div>
     <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

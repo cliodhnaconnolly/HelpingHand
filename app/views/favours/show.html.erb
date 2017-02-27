@@ -22,10 +22,10 @@
 
   <h3>Can you help? Post a comment!</h3>
   <section class="comment_form">
-    <%= form_for(@comment) do |f| %>
+    <%= form_for [@favour, @comment], html: {class: "ui reply form"} do |f| %>
         <div class="field">
           <%= f.text_area :content, placeholder: "Compose new comment..." %>
-          <%= hidden_field_tag :favour_id, @favour.id %>
+          <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
         </div>
         <%= f.submit "Post", class: "btn btn-primary" %>
     <% end %>

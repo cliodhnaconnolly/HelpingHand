@@ -22,10 +22,12 @@ Rails.application.routes.draw do
   get     '/test/:id/',      to: 'users#test'
   get     '/nearby',      to: 'favours#nearby'
   resources :users
-  resources :favours
+  resources :favours do
+    resources :comments,          only: [:create, :destroy]
+  end
   resources :conversations do
     resources :messages
   end
   resources :forgot_passwords, only: [:new, :create, :edit, :update]
-  resources :comments,          only: [:create, :destroy]
+
 end
