@@ -20,13 +20,18 @@ class FavoursController < ApplicationController
         @favour = current_user.favours.build(favour_params)
 
         @favour.deadline = deadline_options_to_time(params[:deadline_option])
+        if params[:address] == ""
+          puts 'HEYYYY'
+          @favour.address = ''
+        end
+
         if params[:use_current_location] == 'true'
           @favour.latitude = params[:lat]
           @favour.longitude = params[:long]
-          @favour.address = params[:address]
+          #@favour.address = params[:address]
         else
           @favour.use_location = false
-          @favour.address = params[:address]
+          #@favour.address = params[:address]
         end
 
         if @favour.save
