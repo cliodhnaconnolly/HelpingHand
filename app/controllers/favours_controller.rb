@@ -82,11 +82,11 @@ class FavoursController < ApplicationController
         when 1
           Time.current + 5.minutes
         when 2
-          Time.end_of_hour
+          Time.now.end_of_hour
         when 3
           Time.current + 3.hours
         when 4
-          Time.end_of_day
+          Time.now.end_of_day
         else 0
       end
     end
