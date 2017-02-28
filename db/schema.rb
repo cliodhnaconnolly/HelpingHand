@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220232644) do
+ActiveRecord::Schema.define(version: 20170228005429) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20170220232644) do
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "address"
     t.boolean  "use_location"
     t.index ["user_id"], name: "index_favours_on_user_id"
   end
