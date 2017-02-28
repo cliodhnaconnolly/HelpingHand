@@ -1,9 +1,9 @@
 <li id="favour-<%= favour.id %>">
   <%= link_to gravatar_for(favour.user, size: 50), favour.user %>
 
-  <span class="user"><%= link_to favour.user.name, favour.user %></span>
+  <!--<span class="user"><%= favour.user.name %></span>-->
 
-  <span class="title"><%= favour.title %></span>
+  <span class="title"><%= link_to favour.title, favour_path(favour) %></span>
 
   <span class="description"><%= favour.description %></span>
 
