@@ -1,6 +1,4 @@
 class StaticPagesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
 
   def home
     @favour = current_user.favours.build if logged_in?
