@@ -1,7 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
     @favour = current_user.favours.build if logged_in?
-    @favour.save
     if(current_user.lat.nil?)
       @favours = Favour.all
     else
