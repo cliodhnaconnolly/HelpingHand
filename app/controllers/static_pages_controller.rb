@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @favour = current_user.favours.build
+    @favour = current_user.favours.build(favour_params)
     if(current_user.lat.nil?)
       @favours = Favour.all
     else
@@ -17,4 +17,9 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+
+  private
+    def favour_params
+      params.permit(:title, :description, :deadline_option, :lat, :long, :address, :use_current_location)
+    end
 end
