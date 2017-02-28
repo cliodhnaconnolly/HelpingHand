@@ -15,22 +15,35 @@
         <!--<%= f.datetime_local_field :deadline %>-->
         <%= select_tag :deadline_option, options_for_select([['Next 5 minutes', 1], ['Next hour', 2], ['Next few hours', 3], ['Anytime today', 4], ['Literally whenever', 5]]) %>
 
-        <%= hidden_field_tag :use_current_location, false %>
-        <%= check_box_tag :use_current_location, checked = true, onclick: "GetLocation()" %>
+
+        <%= check_box_tag :use_current_location, checked = true, id: 'use', onclick: "GetLocation()" %>
         <%= label_tag :use_current_location, "Use current location?", {class: "checkbox inline"} %>
 
         <%= hidden_field_tag :lat, '', id: 'lat' %>
         <%= hidden_field_tag :long, '', id: 'long' %>
 
-        <% if :use_current_location != 1%>
+        <!--<div id="address_details" style="display:none;">-->
+        <h2> Don't want to use current location? Give an alternate address!</h2>
             <%= label_tag :address %>
             <%= text_field_tag :address %>
-        <% end %>
+        <!--</div>-->
 
         <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+  var use_current_location = document.getElementById('use');
+  var address_div = document.getElementById('address_details');
+  use_current_location.onchange = function() {
+    if(this.checked) {
+      address_div.style['display'] = 'block';
+    } else {
+      address_div.style['display'] = 'none';
+    }
+  };
+</script>
 
 <script>
   $(document).on('turbolinks:load', function(){

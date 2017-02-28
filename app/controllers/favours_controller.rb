@@ -21,13 +21,13 @@ class FavoursController < ApplicationController
 
         @favour.deadline = deadline_options_to_time(params[:deadline_option])
         if params[:use_current_location] == 'true'
-          @favour.use_location = true
+          @favour.latitude = params[:lat]
+          @favour.longitude = params[:long]
+          @favour.address = params[:address]
         else
           @favour.use_location = false
+          @favour.address = params[:address]
         end
-        @favour.latitude = params[:lat]
-        @favour.longitude = params[:long]
-        @favour.address = params[:address]
 
         if @favour.save
           flash[:success] = 'Favour has been saved!'
