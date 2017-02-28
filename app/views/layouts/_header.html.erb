@@ -13,7 +13,8 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Home",    root_path %></li>
           <% if logged_in? %>
-              <li><%= link_to "Favours", favours_path %></li>
+              <li><%= link_to "Create a New Favour", favours_new_path %></li>
+              <li><%= link_to "View All Favours", favours_path %></li>
               <li><%= link_to "Inbox",    inbox_path %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">

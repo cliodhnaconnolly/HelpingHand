@@ -1,0 +1,63 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Creator</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @favours.each do |favour| %>
+      <tr>
+        <td><%= link_to favour.title, favour %></a></td>
+        <td><%= favour.user.name %></td>
+        <td><%= favour.description %></td>
+      </tr>
+  <% end %>
+  </tbody>
+
+</table>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(locateSuccess, locateFail);
+    } else {
+      alert("Your browser does not allow me to access your current location, sorry.");
+    }
+
+  })
+
+  // Successful geolocation
+  function locateSuccess(loc) {
+    $.ajax({
+      type: 'POST',
+      url: '/store_location/',
+      data: {lat: loc.coords.latitude, lng: loc.coords.longitude},
+      dataType: 'json'
+    }).done(function(data){
+      console.log(data)
+    });
+  }
+
+
+  // Unsuccessful geolocation
+  function locateFail(geoPositionError) {
+    switch (geoPositionError.code) {
+      case 0: // UNKNOWN_ERROR
+        alert('An unknown error occurred, sorry');
+        break;
+      case 1: // PERMISSION_DENIED
+        alert('Permission to use Geolocation was denied');
+        break;
+      case 2: // POSITION_UNAVAILABLE
+        alert("Couldn't find you...");
+        break;
+      case 3: // TIMEOUT
+        alert('The Geolocation request took too long and timed out');
+        break;
+      default:
+    }
+  }
+</script>

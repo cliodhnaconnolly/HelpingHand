@@ -6,7 +6,6 @@ class FavoursController < ApplicationController
     @favour = Favour.find(params[:id])
     @comment = current_user.comments.build if logged_in?
     @comments = @favour.comments.paginate(page: params[:page])
-
   end
 
   def new
