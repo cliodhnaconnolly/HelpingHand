@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :reset_token, :lat, :long
+  attr_accessor :remember_token, :reset_token
   has_many :favours, dependent: :destroy
   has_many :comments
 

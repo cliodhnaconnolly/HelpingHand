@@ -21,3 +21,19 @@ User.create!(name:  "Cliodhna Connolly",
                password:              password,
                password_confirmation: password)
 end
+
+users = User.order(:created_at).take(6)
+5.times do |n|
+  title = Faker::Lorem.sentence(5)
+  description = Faker::Lorem.sentence(30)
+  latitude = Faker::Address.latitude
+  longitude = Faker::Address.longitude
+  use_location = true
+  users.each { |user|
+    user.favours.create!(title: title,
+                 description: description,
+                 latitude: latitude,
+                 longitude: longitude,
+                 use_location: use_location)
+  }
+end

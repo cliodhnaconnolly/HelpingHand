@@ -18,10 +18,10 @@ class UsersController < ApplicationController
     @user = current_user
     respond_to do |format|
       format.json {
-        @user.lat = params[:lat]
-        @user.long = params[:lng]
-        @user.save
-        puts 'STORED ' + @user.lat.to_s + ', ' + @user.long.to_s
+       if @user.updated_at < Time.current - 5.minutes
+          @user.update(lat: params[:lat], long: params[:lng])
+          puts 'STORED ' + @user.lat.to_s + ', ' + @user.long.to_s
+        end
       }
     end
   end
