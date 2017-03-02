@@ -47,9 +47,11 @@ class FavoursController < ApplicationController
   def index
     if(current_user.lat.nil?)
       @favours = Favour.all
+      puts 'has no location'
     else
+      puts 'has location'
       @favours = Favour.near([current_user.lat, current_user.long], 50)
-      @favours = @favours + Favour.where(longitude: nil)
+      @favours = @favours + Favour.where(address: nil).reverse_order
     end
   end
 
