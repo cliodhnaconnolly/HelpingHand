@@ -47,9 +47,11 @@ class FavoursController < ApplicationController
   def index
     if(current_user.lat.nil?)
       @favours = Favour.all
+      @favours = @favours.paginate(page: params[:page])
     else
       @favours = Favour.near([current_user.lat, current_user.long], 50)
       @favours = @favours + Favour.where(longitude: nil).reverse_order
+      @favours = @favours.paginate(page: params[:page])
     end
   end
 
