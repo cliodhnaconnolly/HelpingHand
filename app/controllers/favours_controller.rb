@@ -53,7 +53,7 @@ class FavoursController < ApplicationController
     end
 
     @favours = @favours.paginate(page: params[:page])
-    @favours = @favours.find_all { |favour| favour.deadline.nil? || !favour.deadline.past?}
+    @favours = @favours.find_all { |favour| favour.deadline.blank? || !favour.deadline.past?}
   end
 
   def nearby
