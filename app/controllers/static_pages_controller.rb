@@ -7,6 +7,7 @@ class StaticPagesController < ApplicationController
     else
       @favours = Favour.near([current_user.lat, current_user.long], 50)
       @favours = @favours + Favour.where(longitude: nil).reverse_order
+      @favours = @favours.find_all { |favour| !favour.deadline.past?}
     end
   end
 

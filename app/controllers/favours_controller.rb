@@ -47,12 +47,13 @@ class FavoursController < ApplicationController
   def index
     if(current_user.lat.nil?)
       @favours = Favour.all
-      @favours = @favours.paginate(page: params[:page])
     else
       @favours = Favour.near([current_user.lat, current_user.long], 50)
       @favours = @favours + Favour.where(longitude: nil).reverse_order
-      @favours = @favours.paginate(page: params[:page])
     end
+
+    @favours = @favours.paginate(page: params[:page])
+    @favours = @favours.find_all { |favour| !favour.deadline.past?}
   end
 
   def nearby
@@ -89,6 +90,8 @@ class FavoursController < ApplicationController
           Time.current + 3.hours
         when 4
           Time.now.end_of_day
+        when 5
+          Time.current + 100.years
         else 0
       end
     end

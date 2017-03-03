@@ -5,6 +5,16 @@
 
   <p><%= @favour.description %></p>
 
+  <b>Deadline is </b><% if @favour.deadline.year >= 2117 %>
+      Literally Whenever
+  <% elsif @favour.deadline.today? %>
+      Today at <%= @favour.deadline.strftime("%I:%M%p") %>
+  <% elsif @favour.deadline.to_date == Date.tomorrow %>
+      Tomorrow at <%= @favour.deadline.strftime("%I:%M%p") %>
+  <% else %>
+      <%=@favour.deadline.strftime("%d/%m/%Y at %I:%M%p")%>
+  <% end %>
+
   <p>
     Posted <%= time_ago_in_words(@favour.created_at) %> ago.
     <% if current_user?(@favour.user) %>

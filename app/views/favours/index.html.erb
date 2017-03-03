@@ -1,31 +1,43 @@
 <div class="row">
   <aside class="col-md-12">
     <section class="favours_all">
+      <% if @favours.length == 0 %>
+        <h1>Look's like everyone is sorted, nobody needs something at the moment</h1>
+        <h1>All the deadlines must have based, I hope they got help.</h1>
+        <h1>Why don't you ask for something?</h1>
+      <%else%>
       <h1>All Favours Asked...</h1>
-
-      <%= will_paginate @favours%>
-
       <table class="table table-striped">
         <thead>
-          <tr>
-            <th>Title</th>
-            <th>Creator</th>
-            <th>Description</th>
-          </tr>
+        <tr>
+          <th>Title</th>
+          <th>Creator</th>
+          <th>Description</th>
+          <th>Deadline</th>
+        </tr>
         </thead>
 
         <tbody>
-          <% @favours.each do |favour| %>
+        <% @favours.each do |favour| %>
             <tr>
               <td><%= link_to favour.title, favour %></a></td>
               <td><%= favour.user.name %></td>
               <td><%= favour.description %></td>
+              <td><% if favour.deadline.year >= 2117 %>
+                    Literally Whenever
+                <% elsif favour.deadline.today? %>
+                    Today at <%= favour.deadline.strftime("%I:%M%p") %>
+                <% elsif favour.deadline.to_date == Date.tomorrow %>
+                    Tomorrow at <%= favour.deadline.strftime("%I:%M%p") %>
+                <% else %>
+                    <%=favour.deadline.strftime("%d/%m/%Y at %I:%M%p")%>
+                <% end %></td>
             </tr>
-          <% end %>
+        <% end %>
         </tbody>
 
       </table>
-
+      <%end%>
 
     </section>
   </aside>
