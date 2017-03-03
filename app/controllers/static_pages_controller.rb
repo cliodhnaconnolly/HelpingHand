@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
 
   def home
     @favour = current_user.favours.build if logged_in?
-    if current_user.lat.blank?
+    if logged_in? && current_user.lat.blank?
       @favours = Favour.all
     else
       @favours = Favour.near([current_user.lat, current_user.long], 50)
