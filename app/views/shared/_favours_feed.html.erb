@@ -20,7 +20,9 @@
             <td><%= link_to favour.title, favour %></a></td>
             <td><%= favour.user.name %></td>
             <td><%= favour.description %></td>
-            <td><% if favour.deadline.year >= 2117 %>
+            <td><% if @favour.deadline.blank? %>
+                    No deadline given
+                <% elsif @favour.deadline.year >= 2117 %>
                     Literally Whenever
                 <% elsif favour.deadline.today? %>
                     Today at <%= favour.deadline.strftime("%I:%M%p") %>

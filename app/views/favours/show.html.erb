@@ -5,7 +5,10 @@
 
   <p><%= @favour.description %></p>
 
-  <b>Deadline is </b><% if @favour.deadline.year >= 2117 %>
+  <b>Deadline is </b>
+  <% if @favour.deadline.blank? %>
+      unknown, no deadline given.
+  <% elsif @favour.deadline.year >= 2117 %>
       Literally Whenever
   <% elsif @favour.deadline.today? %>
       Today at <%= @favour.deadline.strftime("%I:%M%p") %>
