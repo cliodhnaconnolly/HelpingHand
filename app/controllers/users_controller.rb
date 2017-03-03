@@ -20,7 +20,6 @@ class UsersController < ApplicationController
       format.json {
        if @user.updated_at < Time.current - 5.minutes
           @user.update(lat: params[:lat], long: params[:lng])
-          puts 'STORED ' + @user.lat.to_s + ', ' + @user.long.to_s
         end
       }
     end
