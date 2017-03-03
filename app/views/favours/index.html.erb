@@ -23,7 +23,7 @@
               <td><%= link_to favour.title, favour %></a></td>
               <td><%= favour.user.name %></td>
               <td><%= favour.description %></td>
-              <td><% if @favour.deadline.blank? %>
+              <td><% if @favour.deadline.nil? %>
                     No deadline given
                 <% elsif @favour.deadline.year >= 2117 %>
                     Literally Whenever
