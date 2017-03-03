@@ -18,7 +18,7 @@
       <% @favours.each do |favour| %>
           <tr>
             <td><%= link_to favour.title, favour %></a></td>
-            <td><%= favour.user.name %></td>
+            <td><%= link_to favour.user.name, favour.user %></td>
             <td><%= favour.description %></td>
             <td><% if favour.deadline.blank? %>
                     No deadline given
