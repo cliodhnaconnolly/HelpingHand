@@ -83,15 +83,15 @@ class FavoursController < ApplicationController
     def deadline_options_to_time(deadline_option)
       case deadline_option.to_f
         when 1
-          Time.current + 5.minutes
+          (Time.current + 5.minutes).to_datetime
         when 2
-          Time.now.end_of_hour
+          (Time.now.end_of_hour).to_datetime
         when 3
-          Time.current + 3.hours
+          (Time.current + 3.hours).to_datetime
         when 4
-          Time.now.end_of_day
+          (Time.now.end_of_day).to_datetime
         when 5
-          Time.current + 100.years
+          (Time.current + 100.years).to_datetime
         else 0
       end
     end
