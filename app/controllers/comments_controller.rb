@@ -24,7 +24,10 @@ class CommentsController < ApplicationController
     puts "USER ID " + @comment.user_id.to_s
     if @comment.save
       flash[:success] = "Comment posted!"
-      redirect_to Favour.find(params[:favour_id])
+      @favour = Favour.find(params[:favour_id])
+      if @favour.user_id != params[:user_id]
+        @favour.send_comment_notification_email
+      redirect_to @favour
     else
       redirect_to favour_path(@favour)
     end

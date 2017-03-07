@@ -9,4 +9,8 @@ class Favour < ApplicationRecord
   geocoded_by :address
   after_validation :geocode,
                    :if => lambda{ |obj| !obj.address.nil? }
+
+  def send_comment_notification_email
+      FavourMailer.comment_notification(self).deliver_now
+  end
 end
