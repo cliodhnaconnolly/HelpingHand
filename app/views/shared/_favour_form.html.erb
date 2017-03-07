@@ -18,27 +18,12 @@
     <%= hidden_field_tag :lat, '', id: 'lat' %>
     <%= hidden_field_tag :long, '', id: 'long' %>
 
-    <!--<div id="address_details" style="display:none;">-->
     <h2> Don't want to use current location? Give an alternate address!</h2>
     <%= label_tag :address %>
     <%= text_field_tag :address %>
-    <!--</div>-->
 
     <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
 <% end %>
-
-<script type="text/javascript">
-  var use_current_location = document.getElementById('use');
-  var address_div = document.getElementById('address_details');
-  use_current_location.onchange = function() {
-    if(this.checked) {
-      address_div.style['display'] = 'block';
-    } else {
-      address_div.style['display'] = 'none';
-    }
-  };
-</script>
-
 
 <script>
   $(document).on('turbolinks:load', function(){
@@ -68,7 +53,7 @@
         alert('An unknown error occurred, sorry');
         break;
       case 1: // PERMISSION_DENIED
-        alert('Permission to use Geolocation was denied');
+        alert('Permission to use Geolocation was denied, please use a different browser');
         break;
       case 2: // POSITION_UNAVAILABLE
         alert("Couldn't find you...");
