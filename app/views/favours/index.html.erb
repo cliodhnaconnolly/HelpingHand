@@ -11,9 +11,9 @@
         <thead>
         <tr>
           <th>Title</th>
-          <th>Creator</th>
-          <th>Description</th>
           <th>Deadline</th>
+          <th>Distance (km)</th>
+          <th>Creator</th>
         </tr>
         </thead>
 
@@ -21,8 +21,6 @@
         <% @favours.each do |favour| %>
             <tr>
               <td><%= link_to favour.title, favour %></a></td>
-              <td><%= link_to favour.user.name, favour.user %></td>
-              <td><%= favour.description %></td>
               <td><% if favour.deadline.nil? %>
                     No deadline given
                 <% elsif favour.deadline.year >= 2117 %>
@@ -34,6 +32,14 @@
                 <% else %>
                     <%=favour.deadline.strftime("%d/%m/%Y at %I:%M%p")%>
                 <% end %></td>
+
+              <td><% if !current_user.lat.nil?  && !favour.latitude.nil? %>
+                    <% Geocoder.configure( :units => :km ) %>
+                    <%= favour.distance_from([current_user.lat, current_user.long]).round(2) %>
+                <% else %>
+                  -
+                <% end %></td>
+                <td><%= link_to favour.user.name, favour.user %></td>
             </tr>
         <% end %>
         </tbody>

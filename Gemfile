@@ -15,6 +15,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'faker',          '1.6.6'
 gem 'geocoder'
 gem 'geocomplete_rails'
+gem 'ruby-units'
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'
