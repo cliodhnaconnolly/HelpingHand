@@ -46,7 +46,7 @@ class FavoursController < ApplicationController
   end
 
   def index
-    if(logged_in? && current_user.lat.nil?)
+    if(!logged_in? || current_user.lat.nil?)
       @favours = Favour.all
     else
       @favours = Favour.near([current_user.lat, current_user.long], 50)
