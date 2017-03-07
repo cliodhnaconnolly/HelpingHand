@@ -11,10 +11,10 @@
         <thead>
         <tr>
           <th>Title</th>
+          <th>Description</th>
           <th>Deadline</th>
           <th>Distance (km)</th>
           <th>Creator</th>
-          <th>Description</th>
         </tr>
         </thead>
 
@@ -22,6 +22,9 @@
         <% @favours.each do |favour| %>
             <tr>
               <td><%= link_to favour.title, favour %></a></td>
+
+              <td><%= favour.description %></td>
+
               <td><% if favour.deadline.nil? %>
                     No deadline given
                 <% elsif favour.deadline.year >= 2117 %>
@@ -43,7 +46,6 @@
 
               <td><%= link_to favour.user.name, favour.user %></td>
 
-              <td><%= favour.description %></td>
             </tr>
         <% end %>
         </tbody>
