@@ -14,6 +14,7 @@
           <th>Deadline</th>
           <th>Distance (km)</th>
           <th>Creator</th>
+          <th>Description</th>
         </tr>
         </thead>
 
@@ -36,10 +37,13 @@
               <td><% if !current_user.lat.nil?  && !favour.latitude.nil? %>
                     <% Geocoder.configure( :units => :km ) %>
                     <%= favour.distance_from([current_user.lat, current_user.long]).round(2) %>
-                <% else %>
-                  -
-                <% end %></td>
-                <td><%= link_to favour.user.name, favour.user %></td>
+                  <% else %>
+                    -
+                  <% end %></td>
+
+              <td><%= link_to favour.user.name, favour.user %></td>
+
+              <td><%= favour.description %></td>
             </tr>
         <% end %>
         </tbody>
