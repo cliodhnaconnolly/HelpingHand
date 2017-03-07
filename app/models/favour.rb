@@ -8,5 +8,5 @@ class Favour < ApplicationRecord
   after_validation :reverse_geocode  # auto-fetch address
   geocoded_by :address
   after_validation :geocode,
-                   :if => lambda{ |obj| obj.latitude.nil? }
+                   :if => lambda{ |obj| !obj.address.nil? }
 end

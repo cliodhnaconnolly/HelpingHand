@@ -17,6 +17,11 @@
   <% else %>
       <%=@favour.deadline.strftime("%d/%m/%Y at %I:%M%p")%>
   <% end %>
+  
+  <% if !@favour.address.blank? %>
+      <p></p>
+      <b>Needed at </b><%= @favour.address %>
+  <% end %>
 
   <p>
     Posted <%= time_ago_in_words(@favour.created_at) %> ago.
