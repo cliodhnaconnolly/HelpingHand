@@ -35,6 +35,7 @@
   <%= link_to gravatar_for(@favour.user, size: 50), @favour.user %>
   <span class="user"><%= link_to @favour.user.name, @favour.user %></span>
 
+  <% if logged_in? %>
   <p></p>
   <%= link_to 'Send a message!', conversations_path(sender_id: current_user.id, receiver_id: @favour.user.id), method: 'post'%>
 
@@ -48,6 +49,10 @@
         <%= f.submit "Post", class: "btn btn-primary" %>
     <% end %>
   </section>
+
+  <% else %>
+    <p>Please log in to post a comment or message the user!</p>
+  <% end %>
 
   <div class="col-md-8">
     <% if @favour.comments.any? %>
