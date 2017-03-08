@@ -7,4 +7,7 @@ class Message < ActiveRecord::Base
     created_at.strftime("%d/%m/%y at %l:%M %p")
   end
 
+  def send_message_notification_email(conversation)
+    MessageMailer.message_notification(conversation).deliver_now
+  end
 end

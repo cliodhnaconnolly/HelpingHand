@@ -7,8 +7,15 @@ class ConversationsController < ApplicationController
   end
 
   def inbox
-    @users = User.all
-    @conversations = Conversation.all
+    if logged_in?
+      @users = User.all
+      @conversations = Conversation.all
+    else
+      store_location
+      flash[:info] = 'Please log in to view your messages!'
+      redirect_to login_path
+    end
+
   end
 
   def create

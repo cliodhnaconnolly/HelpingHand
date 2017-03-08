@@ -1,0 +1,7 @@
+<h1>New Message</h1>
+
+<p>You've received a new message from <%= @sender.name %>. Click the link below to check it out!</p>
+
+<%= link_to "View Conversation", conversation_messages_url(@conversation) %>
+
+<p>Thank you for using Helping Hand.</p>
