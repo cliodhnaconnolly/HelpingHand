@@ -92,6 +92,8 @@ class FavoursController < ApplicationController
         when 4
           (Time.now.end_of_day).to_datetime
         when 5
+          (Time.now.end_of_week).to_datetime
+        when 6
           (Time.current + 100.years).to_datetime
         else 0
       end
