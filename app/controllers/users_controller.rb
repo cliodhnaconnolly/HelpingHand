@@ -25,6 +25,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_my_favours
+    @user = User.find(params[:id])
+    @favours = @user.favours.paginate(page: params[:page])
+  end
+
   def test
     @user = User.find(params[:id])
   end

@@ -1,0 +1,11 @@
+<% provide(:title, 'My Favours') %>
+<div class="row">
+  <div class="col-md-8">
+    <% if @user.favours.any? %>
+        <h3>My Favours (<%= @user.favours.count %>)</h3>
+        <ul class="favours">
+          <%= render @favours %>
+        </ul>
+    <% end %>
+  </div>
+</div>

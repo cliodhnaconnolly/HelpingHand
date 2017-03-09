@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get     '/inbox',     to: 'conversations#inbox'
   get     '/test/:id/',      to: 'users#test'
   get     '/nearby',      to: 'favours#nearby'
+  get     '/my_favours/:id/',  to: 'users#show_my_favours', :as => :my_favours
   resources :users
   resources :favours do
     resources :comments,          only: [:create, :destroy]
