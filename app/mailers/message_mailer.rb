@@ -7,8 +7,8 @@ class MessageMailer < ApplicationMailer
   #
   def message_notification(conversation)
     @conversation = conversation
-    @user = User.find(conversation.receiver_id)
+    @receiver = User.find(conversation.receiver_id)
     @sender = User.find(conversation.sender_id)
-    mail to: @user.email, subject: "You've received a new message"
+    mail to: @sender.email, subject: "You've received a new message"
   end
 end
