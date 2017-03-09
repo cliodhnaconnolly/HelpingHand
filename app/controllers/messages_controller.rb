@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.new(message_params)
     puts 'MSG: ' + Conversation.find(@message.conversation_id).receiver_id.to_s
     if @message.save
-      @message.send_message_notification_email(@conversation)
+      @message.send_message_notification_email(@conversation, current_user)
       redirect_to conversation_messages_path(@conversation)
     end
   end
