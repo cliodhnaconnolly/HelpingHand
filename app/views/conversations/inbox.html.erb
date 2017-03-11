@@ -12,9 +12,9 @@
             <% end %>
           <li class="list-group-item">
             <%= link_to gravatar_for(receiver, size: 50), receiver %>
-            <%= link_to receiver.name, conversation_messages_path(conversation)%>
+            <%= link_to receiver.name, receiver%>
             <p></p>
-            <p>See latest messages...</p>
+            <%= link_to 'See latest messages...', conversation_messages_path(conversation)%>
           </li>
         <% end %>
 
