@@ -47,7 +47,7 @@ class FavoursController < ApplicationController
 
   def index
     if(!logged_in? || current_user.lat.nil?)
-      @favours = Favour.where.not(:deadline.nil?)
+      @favours = Favour.all
     else
       @favours = Favour.near([current_user.lat, current_user.long], 50)
       @favours = @favours + Favour.where(longitude: nil).reverse_order
