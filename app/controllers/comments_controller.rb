@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
       @favour = Favour.find(params[:favour_id])
 
       # If comment not by creator only update creator
-      if @favour.user_id != params[:user_id]
+      if @favour.user_id != current_user.id
         @favour.send_comment_notification_email
       else  # If creator comments update all commentors
         @comments = @favour.comments
