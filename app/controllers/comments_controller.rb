@@ -34,8 +34,9 @@ class CommentsController < ApplicationController
         to_email_ary = Array.new
 
         @comments.each do |comment|
-          commenter = User.find_by(comment.user_id)
-          if !commenter.nil? && to_email_ary.find_index(commenter.email).nil?
+          puts 'hello ' + comment.user_id.to_s
+          commenter = User.find(comment.user_id)
+          if !commenter.nil? && commenter != current_user && to_email_ary.find_index(commenter.email).nil?
             to_email_ary.push(commenter.email)
           end
         end
