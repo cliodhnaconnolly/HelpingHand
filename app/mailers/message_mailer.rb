@@ -12,9 +12,11 @@ class MessageMailer < ApplicationMailer
 
     if(current_user == @receiver)
       @user = @sender
+      @other = @receiver
       mail to: @user.email, subject: "You've received a new message"
     else
       @user = @receiver
+      @other = @sender
       mail to: @user.email, subject: "You've received a new message"
     end
 
