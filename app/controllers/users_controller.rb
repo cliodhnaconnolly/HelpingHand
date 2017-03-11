@@ -16,12 +16,14 @@ class UsersController < ApplicationController
   def store_user_location
     puts 'STORING USER LOCATION'
     @user = current_user
-    respond_to do |format|
-      format.json {
-       if @user.updated_at < Time.current - 5.minutes
-          @user.update(lat: params[:lat], long: params[:lng])
-        end
-      }
+    if !@user.nil?
+      respond_to do |format|
+        format.json {
+         if @user.updated_at < Time.current - 5.minutes
+            @user.update(lat: params[:lat], long: params[:lng])
+          end
+        }
+      end
     end
   end
 
