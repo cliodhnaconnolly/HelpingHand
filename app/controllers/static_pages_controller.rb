@@ -11,7 +11,7 @@ class StaticPagesController < ApplicationController
     end
 
     #@favours = @favours.paginate(page: params[:page])
-    @favours = @favours.find_all { |favour| !favour.deadline.past?}
+    @favours = @favours.find_all { |favour| !favour.deadline.nil? && !favour.deadline.past?}
   end
 
   def help
