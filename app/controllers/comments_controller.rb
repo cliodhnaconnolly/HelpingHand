@@ -25,8 +25,25 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:success] = "Comment posted!"
       @favour = Favour.find(params[:favour_id])
+
+      # If comment not by creator only update creator
       if @favour.user_id != params[:user_id]
         @favour.send_comment_notification_email
+      else  # If creator comments update all commentors
+        @comments = @favour.comments
+        to_email_ary = Array.new
+
+        @comments.each do |comment|
+          commenter = User.find_by(comment.user_id)
+          if !commenter.nil? && to_email_ary.find_index(commenter.email).nil?
+            to_email_ary.push(commenter.email)
+          end
+        end
+
+        to_email_ary.each do |email|
+          @favour.send_creator_comment_notification_email(email)
+        end
+
       end
       redirect_to @favour
     else

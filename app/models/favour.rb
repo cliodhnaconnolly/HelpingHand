@@ -13,4 +13,8 @@ class Favour < ApplicationRecord
   def send_comment_notification_email
       FavourMailer.comment_notification(self).deliver_now
   end
+
+  def send_creator_comment_notification_email(email)
+    FavourMailer.creator_comment_notification(self, email).deliver_now
+  end
 end

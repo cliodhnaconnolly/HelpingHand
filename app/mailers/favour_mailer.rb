@@ -11,4 +11,9 @@ class FavourMailer < ApplicationMailer
     mail to: @user.email, subject: 'New comment on favour'
   end
 
+  def creator_comment_notification(favour, email)
+    @favour = favour
+    mail to: email, subject: 'Creator commented on Favour'
+  end
+
 end
