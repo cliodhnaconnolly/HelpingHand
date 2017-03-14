@@ -18,9 +18,12 @@
       <%=@favour.deadline.strftime("%d/%m/%Y at %I:%M%p")%>
   <% end %>
   
-  <% if !@location.nil? %>
+  <% if !@location.nil? && (!@favour.less_specific_location.nil? || @favour.less_specific_location )%>
       <p></p>
       <b>Needed at </b><%= @location %>
+  <% else %>
+      <p></p>
+      <b>Needed at </b><%= @favour.address %>
   <% end %>
 
   <p>

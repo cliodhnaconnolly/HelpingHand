@@ -48,7 +48,26 @@ class FavoursController < ApplicationController
         end
       }
     end
+  end
 
+  def update
+    @favour = Favour.find(params[:id])
+
+    @favour.deadline = deadline_options_to_time(params[:deadline_option])
+    @favour.address = params[:address]
+
+    if params[:use_current_location] == 'true'
+      @favour.use_location = true
+      @favour.latitude = params[:lat]
+      @favour.longitude = params[:long]
+    else
+      @favour.use_location = false
+    end
+
+    if @favour.update_attributes(favour_params)
+      flash[:success] = 'Favour updated'
+      redirect_to @favour
+    end
   end
 
   def edit
@@ -84,7 +103,7 @@ class FavoursController < ApplicationController
 
   private
     def favour_params
-      params.require(:favour).permit(:title, :description, :deadline_option, :lat, :long, :address, :use_current_location)
+      params.require(:favour).permit(:title, :description, :deadline_option, :lat, :long, :address, :use_current_location, :less_specific_location)
     end
 
     def correct_user

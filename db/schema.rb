@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228005035) do
+ActiveRecord::Schema.define(version: 20170314232523) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -35,13 +35,14 @@ ActiveRecord::Schema.define(version: 20170228005035) do
     t.string   "title"
     t.string   "description"
     t.datetime "deadline"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "use_location"
     t.string   "address"
+    t.boolean  "less_specific_location"
     t.index ["user_id"], name: "index_favours_on_user_id"
   end
 
