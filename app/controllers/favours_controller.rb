@@ -31,6 +31,7 @@ class FavoursController < ApplicationController
         @favour.address = params[:address]
 
         if params[:use_current_location] == 'true'
+          @favour.use_location = true
           @favour.latitude = params[:lat]
           @favour.longitude = params[:long]
           #@favour.address = params[:address]
@@ -48,6 +49,10 @@ class FavoursController < ApplicationController
       }
     end
 
+  end
+
+  def edit
+    @favour = Favour.find(params[:id])
   end
 
   def index

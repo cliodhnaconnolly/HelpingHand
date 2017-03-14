@@ -27,7 +27,8 @@
     Posted <%= time_ago_in_words(@favour.created_at) %> ago.
     <% if current_user?(@favour.user) %>
       <%= link_to "Delete", @favour, method: :delete,
-                  data: { confirm: "You sure?" } %>
+                  data: { confirm: "You sure?" } %></br>
+      <%= link_to "Edit Favour", edit_favour_path(@favour.id) %>
     <% end %>
   </p>
 
