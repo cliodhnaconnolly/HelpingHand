@@ -3,7 +3,7 @@ class Favour < ApplicationRecord
   has_many :comments, dependent: :destroy
   validates :user_id, presence: true
   validates :title, presence: true
-  validates :deadline, presence: true
+  validates :deadline, presence: true, :on => :create
   geocoded_by :address
   after_validation :geocode,
                    :if => lambda{ |obj| !obj.address.nil? }

@@ -53,20 +53,41 @@ class FavoursController < ApplicationController
   def update
     @favour = Favour.find(params[:id])
 
-    @favour.deadline = deadline_options_to_time(params[:deadline_option])
-    @favour.address = params[:address]
+    if !params[:title].blank?
+      @favour.title = params[:title]
+    end
 
-    if params[:use_current_location] == 'true'
+    if !params[:description].blank?
+      @favour.description = params[:description]
+    end
+
+    puts 'DEADLINE OPT ' + params[:deadline_option]
+    if params[:deadline_option] != "0"
+      @favour.deadline = deadline_options_to_time(params[:deadline_option])
+    end
+
+    if !params[:address].blank?
+      @favour.address = params[:address]
+    end
+
+    if params[:use_new_current_location] == 'true'
       @favour.use_location = true
       @favour.latitude = params[:lat]
       @favour.longitude = params[:long]
-    else
-      @favour.use_location = false
+
+      query = "#{@favour.latitude},#{@favour.longitude}"
+      result = Geocoder.search(query).first
+      if result.present?
+        puts 'FOUND ADD ' + result.address
+      end
+      @favour.address = result.address
     end
 
-    if @favour.update_attributes(favour_params)
+    if @favour.save
       flash[:success] = 'Favour updated'
       redirect_to @favour
+    else
+      render 'edit'
     end
   end
 
@@ -82,8 +103,6 @@ class FavoursController < ApplicationController
       @favours = @favours + Favour.where(longitude: nil).reverse_order
     end
 
-    #@favours = @favours.paginate(page: params[:page])
-    #@favours = @favours.find_all { |favour| favour.deadline.blank? || !favour.deadline.past?}
     @favours = @favours.find_all { |favour| !favour.deadline.nil? && !favour.deadline.past?}
   end
 
@@ -103,7 +122,8 @@ class FavoursController < ApplicationController
 
   private
     def favour_params
-      params.require(:favour).permit(:title, :description, :deadline_option, :lat, :long, :address, :use_current_location, :less_specific_location)
+      params.require(:favour).permit(:title, :description, :deadline_option, :lat, :long,
+                                     :address, :use_current_location, :less_specific_location)
     end
 
     def correct_user

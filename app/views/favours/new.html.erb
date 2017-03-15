@@ -17,7 +17,6 @@
         <!--<%= f.datetime_local_field :deadline %>-->
         <%= select_tag :deadline_option, options_for_select([['Next 5 minutes', 1], ['Next hour', 2], ['Next few hours', 3], ['Anytime today', 4], ['End of the week', 5], ['Literally whenever', 6]]) %>
 
-
         <%= check_box_tag :use_current_location, checked = true, id: 'use', onclick: "GetLocation()" %>
         <%= label_tag :use_current_location, "Use current location?", {class: "checkbox inline"} %>
 

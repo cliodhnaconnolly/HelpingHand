@@ -15,10 +15,11 @@
 
         <%= f.label :deadline %>
         <!--<%= f.datetime_local_field :deadline %>-->
-        <%= select_tag :deadline_option, options_for_select([['Next 5 minutes', 1], ['Next hour', 2], ['Next few hours', 3], ['Anytime today', 4], ['End of the week', 5], ['Literally whenever', 6]]) %>
+        <% puts 'deadline options is ' + :deadline_option.to_s %>
+        <%= select_tag :deadline_option, options_for_select([['No Change', 0], ['Next 5 minutes', 1], ['Next hour', 2], ['Next few hours', 3], ['Anytime today', 4], ['End of the week', 5], ['Literally whenever', 6]]) %>
 
-        <%= check_box_tag :use_current_location, checked = false, id: 'use' %>
-        <%= label_tag :use_current_location, 'Use current location?', {class: "checkbox inline"} %>
+        <%= check_box_tag :use_new_current_location, checked = 'true' %>
+        <%= label_tag :use_new_current_location, 'Use new current location?', {class: "checkbox inline"} %>
 
         <%= f.check_box :less_specific_location %>
         <%= f.label :less_specific_location, 'Display a less specific location?', {class: "checkbox inline"} %>
