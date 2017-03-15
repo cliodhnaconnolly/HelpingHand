@@ -46,6 +46,7 @@
   <h3>Can you help? Post a comment!</h3>
   <section class="comment_form">
     <%= form_for [@favour, @comment], html: {class: "ui reply form"} do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <div class="field">
           <%= f.text_area :content, placeholder: "Compose new comment..." %>
           <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
