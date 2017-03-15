@@ -79,8 +79,9 @@ class FavoursController < ApplicationController
       result = Geocoder.search(query).first
       if result.present?
         puts 'FOUND ADD ' + result.address
+        @favour.address = result.address
       end
-      @favour.address = result.address
+
     end
 
     if @favour.save
