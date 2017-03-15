@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def show_my_favours
     @user = User.find(params[:id])
-    @favours = @user.favours.paginate(page: params[:page])
+    @favours = @user.favours.paginate(page: params[:page]).reverse_order
   end
 
   def test
