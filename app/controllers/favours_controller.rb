@@ -53,13 +53,10 @@ class FavoursController < ApplicationController
   def update
     @favour = Favour.find(params[:id])
 
-    if !params[:title].blank?
-      @favour.title = params[:title]
-    end
+    puts 'TITLE AND DESCRIPTION ' + params[:favour][:title].to_s + ", " + params[:favour][:description]
+    @favour.title = params[:favour][:title]
+    @favour.description = params[:favour][:description]
 
-    if !params[:description].blank?
-      @favour.description = params[:description]
-    end
 
     puts 'DEADLINE OPT ' + params[:deadline_option]
     if params[:deadline_option] != "0"
