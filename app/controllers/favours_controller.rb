@@ -34,7 +34,7 @@ class FavoursController < ApplicationController
           @favour.use_location = true
           @favour.latitude = params[:lat]
           @favour.longitude = params[:long]
-          #@favour.address = params[:address]
+          @favour.address = params[:address]
         else
           @favour.use_location = false
           #@favour.address = params[:address]
