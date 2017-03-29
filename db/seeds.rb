@@ -28,12 +28,14 @@ users = User.order(:created_at).take(6)
   description = Faker::Lorem.sentence(30)
   latitude = Faker::Address.latitude
   longitude = Faker::Address.longitude
+  deadline = Faker::Time.forward(60, :afternoon)
   use_location = true
   users.each { |user|
     user.favours.create!(title: title,
                  description: description,
                  latitude: latitude,
                  longitude: longitude,
+                 deadline: deadline,
                  use_location: use_location)
   }
 end
