@@ -24,12 +24,6 @@ class FavoursController < ApplicationController
         @favour = current_user.favours.build(favour_params)
 
         @favour.deadline = deadline_options_to_time(params[:deadline_option])
-        # if params[:address] == ""
-        #   puts 'HEYYYY'
-        #   @favour.address = ''
-        # end
-        #puts "ADDRESS IS BLANK " + params[:address].blank?.to_s + " OR NIL " + params[:address].nil?.to_s
-        #@favour.address = nil
 
         if params[:use_current_location] == 'true'
           @favour.use_location = true
@@ -38,7 +32,6 @@ class FavoursController < ApplicationController
           @favour.address = params[:address]
         else
           @favour.use_location = false
-          #@favour.address = params[:address]
         end
 
         if @favour.save
@@ -54,21 +47,18 @@ class FavoursController < ApplicationController
   def update
     @favour = Favour.find(params[:id])
 
-    puts 'TITLE AND DESCRIPTION ' + params[:favour][:title].to_s + ", " + params[:favour][:description]
     @favour.title = params[:favour][:title]
     @favour.description = params[:favour][:description]
 
-
-    puts 'DEADLINE OPT ' + params[:deadline_option]
     if params[:deadline_option] != "0"
       @favour.deadline = deadline_options_to_time(params[:deadline_option])
     end
 
-    #puts "ADDRESS IS " + params[:address]
     if !params[:address].blank?
       @favour.address = params[:address]
     end
 
+    # Get current location with new coords
     if params[:use_new_current_location] == 'true'
       @favour.use_location = true
       @favour.latitude = params[:lat]
@@ -77,7 +67,6 @@ class FavoursController < ApplicationController
       query = "#{@favour.latitude},#{@favour.longitude}"
       result = Geocoder.search(query).first
       if result.present?
-        puts 'FOUND ADD ' + result.address
         @favour.address = result.address
       end
 
@@ -106,14 +95,6 @@ class FavoursController < ApplicationController
     @favours = @favours.find_all { |favour| !favour.deadline.nil? && !favour.deadline.past?}
   end
 
-  def nearby
-    if params[:search].present?
-      @favours = Favour.near([current_user.lat, current_user.long], 50)
-    else
-      @favours = Favour.all
-    end
-  end
-
   def destroy
     @favour.destroy
     flash[:success] = 'Favour deleted'
@@ -134,19 +115,17 @@ class FavoursController < ApplicationController
     def deadline_options_to_time(deadline_option)
       case deadline_option.to_f
         when 1
-          puts 'CURRENT TIME ZONE IS ' + Time.zone.to_s
-          puts 'CURRENT TIME IS ' + Time.zone.now.to_s
           (Time.zone.now + 5.minutes).to_datetime
         when 2
           (Time.zone.now.end_of_hour).to_datetime
         when 3
-          (Time.zone.current + 3.hours).to_datetime
+          (Time.zone.now + 3.hours).to_datetime
         when 4
           (Time.zone.now.end_of_day).to_datetime
         when 5
           (Time.zone.now.end_of_week).to_datetime
         when 6
-          (Time.zone.current + 100.years).to_datetime
+          (Time.zone.now + 100.years).to_datetime
         else 0
       end
     end

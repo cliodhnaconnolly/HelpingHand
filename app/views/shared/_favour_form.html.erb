@@ -8,7 +8,6 @@
     <%= f.text_field :description %>
 
     <%= f.label :deadline %>
-    <!--<%= f.datetime_local_field :deadline %>-->
     <%= select_tag :deadline_option, options_for_select([['Next 5 minutes', 1], ['Next hour', 2], ['Next few hours', 3], ['Anytime today', 4], ['End of the week', 5], ['Literally whenever', 6]]) %>
 
 
@@ -24,44 +23,3 @@
 
     <%= f.submit 'Create my Favour', class: "btn btn-primary" %>
 <% end %>
-
-<script>
-  $(document).on('turbolinks:load', function(){
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(locateSuccess, locateFail);
-    } else {
-      alert("Your browser does not allow me to access your current location, sorry.");
-    }
-  })
-  // Successful geolocation
-  function locateSuccess(loc) {
-    $('#lat').val(loc.coords.latitude);
-    $('#long').val(loc.coords.longitude);
-    $.ajax({
-      type: 'POST',
-      url: '/store_location/',
-      data: {lat: loc.coords.latitude, lng: loc.coords.longitude},
-      dataType: 'json'
-    }).done(function(data){
-      console.log(data)
-    });
-  }
-  // Unsuccessful geolocation
-  function locateFail(geoPositionError) {
-    switch (geoPositionError.code) {
-      case 0: // UNKNOWN_ERROR
-        alert('An unknown error occurred, sorry');
-        break;
-      case 1: // PERMISSION_DENIED
-        alert('Permission to use Geolocation was denied, please use a different browser');
-        break;
-      case 2: // POSITION_UNAVAILABLE
-        alert("Couldn't find you...");
-        break;
-      case 3: // TIMEOUT
-        alert('The Geolocation request took too long and timed out');
-        break;
-      default:
-    }
-  }
-</script>

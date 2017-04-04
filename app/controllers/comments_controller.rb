@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action do
     @favour = Favour.find(params[:favour_id])
-    puts "GOT IT" + @favour.title.to_s
   end
 
   def show
@@ -11,17 +10,11 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
-    puts 'hey'
   end
 
   def create
-    #temp = params[:favour_id]
-    #@favour = Favour.find(params[:favour_id])
     @comment = @favour.comments.new(comment_params)
-    #@comment.favour = Favour.find(params[:favour_id])
-    puts "PLZ " + @comment.favour_id.to_s
-    puts "CONTENT " + @comment.content.to_s
-    puts "USER ID " + @comment.user_id.to_s
+
     if @comment.save
       flash[:success] = "Comment posted!"
       @favour = Favour.find(params[:favour_id])
@@ -34,7 +27,6 @@ class CommentsController < ApplicationController
         to_email_ary = Array.new
 
         @comments.each do |comment|
-          puts 'hello ' + comment.user_id.to_s
           commenter = User.find(comment.user_id)
           if !commenter.nil? && commenter != current_user && to_email_ary.find_index(commenter.email).nil?
             to_email_ary.push(commenter.email)

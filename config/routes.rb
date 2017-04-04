@@ -19,8 +19,6 @@ Rails.application.routes.draw do
   delete  '/logout',    to: 'sessions#destroy'
   get     '/favours',   to: 'favours#index'
   get     '/inbox',     to: 'conversations#inbox'
-  get     '/test/:id/',      to: 'users#test'
-  get     '/nearby',      to: 'favours#nearby'
   get     '/my_favours/:id/',  to: 'users#show_my_favours', :as => :my_favours
   resources :users
   resources :favours do

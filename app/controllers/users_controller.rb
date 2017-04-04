@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-  #respond_to :html, :js
 
   def show
     @user = User.find(params[:id])
@@ -14,12 +13,11 @@ class UsersController < ApplicationController
   end
 
   def store_user_location
-    puts 'STORING USER LOCATION'
     @user = current_user
     if !@user.nil?
       respond_to do |format|
         format.json {
-         if @user.updated_at < Time.current - 5.minutes
+         if @user.updated_at < Time.zone.now - 5.minutes
             @user.update(lat: params[:lat], long: params[:lng])
           end
         }
@@ -30,10 +28,6 @@ class UsersController < ApplicationController
   def show_my_favours
     @user = User.find(params[:id])
     @favours = @user.favours.paginate(page: params[:page]).reverse_order
-  end
-
-  def test
-    @user = User.find(params[:id])
   end
 
   def create
