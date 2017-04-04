@@ -132,17 +132,19 @@ class FavoursController < ApplicationController
     def deadline_options_to_time(deadline_option)
       case deadline_option.to_f
         when 1
-          (Time.current + 5.minutes).to_datetime
+          puts 'CURRENT TIME ZONE IS ' + Time.zone.to_s
+          puts 'CURRENT TIME IS ' + Time.zone.now.to_s
+          (Time.zone.now + 5.minutes).to_datetime
         when 2
-          (Time.now.end_of_hour).to_datetime
+          (Time.zone.now.end_of_hour).to_datetime
         when 3
-          (Time.current + 3.hours).to_datetime
+          (Time.zone.current + 3.hours).to_datetime
         when 4
-          (Time.now.end_of_day).to_datetime
+          (Time.zone.now.end_of_day).to_datetime
         when 5
-          (Time.now.end_of_week).to_datetime
+          (Time.zone.now.end_of_week).to_datetime
         when 6
-          (Time.current + 100.years).to_datetime
+          (Time.zone.current + 100.years).to_datetime
         else 0
       end
     end
