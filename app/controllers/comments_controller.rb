@@ -46,6 +46,7 @@ class CommentsController < ApplicationController
         end
 
       end
+
       redirect_to @favour
     else
       redirect_to favour_path(@favour)

@@ -21,9 +21,12 @@
   <% if !@location.nil? && (!@favour.less_specific_location.nil? || @favour.less_specific_location )%>
       <p></p>
       <b>Needed at </b><%= @location %>
-  <% else %>
+  <% elsif !@favour.address.blank? %>
       <p></p>
       <b>Needed at </b><%= @favour.address %>
+  <% else %>
+      <p></p>
+      No location given.
   <% end %>
 
   <p>
@@ -69,4 +72,5 @@
       <h3>No comments as of yet</h3>
     <% end %>
   </div>
+
 </div>

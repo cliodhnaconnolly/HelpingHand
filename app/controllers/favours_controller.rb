@@ -28,7 +28,8 @@ class FavoursController < ApplicationController
         #   puts 'HEYYYY'
         #   @favour.address = ''
         # end
-        @favour.address = params[:address]
+        #puts "ADDRESS IS BLANK " + params[:address].blank?.to_s + " OR NIL " + params[:address].nil?.to_s
+        #@favour.address = nil
 
         if params[:use_current_location] == 'true'
           @favour.use_location = true
@@ -63,6 +64,7 @@ class FavoursController < ApplicationController
       @favour.deadline = deadline_options_to_time(params[:deadline_option])
     end
 
+    #puts "ADDRESS IS " + params[:address]
     if !params[:address].blank?
       @favour.address = params[:address]
     end

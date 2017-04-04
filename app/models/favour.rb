@@ -8,7 +8,7 @@ class Favour < ApplicationRecord
   after_validation :geocode,
                    :if => lambda{ |obj| !obj.address.nil? }
   reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode  # auto-fetch address
+  after_validation :reverse_geocode
 
   def send_comment_notification_email
       FavourMailer.comment_notification(self).deliver_now
