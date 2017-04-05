@@ -2,3 +2,10 @@ cliodhna:
   name: Cliodhne Me
   email: cliodhna@me.com
   password_digest: <%= User.digest('password') %>
+  id: 1
+
+connolly:
+  name: Connolly
+  email: connolly@me.com
+  password_digest: <%= User.digest('password') %>
+  id: 2
