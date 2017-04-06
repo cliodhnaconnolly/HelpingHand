@@ -1,12 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  creator: MyString
-  title: MyString
-  description: MyString
-  deadline:
-  latitude: MyString
-  longitude: MyString
+  creator: Creator
+  title: Favour Test
+  description: Testing Favours
+  deadline: <%= 10.minutes.ago %>
+  user_id: 1
+  latitude: <%= Faker::Address.latitude %>
+  longitude: <%= Faker::Address.longitude %>
 
 two:
   creator: MyString

@@ -76,4 +76,7 @@ ActiveRecord::Schema.define(version: 20170315001354) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "comments", "favours"
+  add_foreign_key "comments", "users"
+  add_foreign_key "favours", "users"
 end

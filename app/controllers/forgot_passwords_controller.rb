@@ -20,7 +20,7 @@ class ForgotPasswordsController < ApplicationController
   end
 
   def edit
-
+    @user = User.find(params[:id])
   end
 
   def update
@@ -47,7 +47,7 @@ class ForgotPasswordsController < ApplicationController
     end
 
     def check_expiration
-      if @user.password_reset_expired?
+      if @user && @user.password_reset_expired?
         flash[:danger] = 'Password reset link has expired'
         redirect_to new_forgot_password_url
       end
