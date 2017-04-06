@@ -30,4 +30,5 @@ $ rails server
 
 
 ## Link to Heroku Deployment
-https://helping-hand-ucd.herokuapp.com/
+Live - https://helping-hand-ucd.herokuapp.com/
+Staging - https://staging-helping-hand-ucd.herokuapp.com/
